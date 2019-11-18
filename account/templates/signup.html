@@ -1,3 +1,16 @@
-<h3>
-     signup
-</h3>
+<!-- 회원가입 구현을 위해 임시로 form을 만들어 두었습니다.
+다 지우고 새로 구현하면 됩니다.
+현재는 username과 password1, password2 name속성을 가지고 있습니다. -->
+
+<h1>
+    나의 조교가 되면 A+은 보장해주마
+</h1>
+
+
+<form method="POST", action="">
+    {% csrf_token %}
+    <label>허허.. 학생 이름이 어떻게 되나?</label><input type="text" name="username"><br>
+    <label>학생.. 교수 앞에서 감히 비밀번호가 있다는 말인가?</label><input type="password" name="password1"><br>
+    <label>나는 한번 더 적으면 학생이 뭘 적었는지 다 알수 있지!</label><input type="password" name="password2"><br>
+    <input type="submit" value="환영하네. 자네는 이제부터 내 조교야">
+</form>

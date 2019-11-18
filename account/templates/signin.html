@@ -1,3 +1,17 @@
+<!-- 회원가입 구현을 위해 임시로 form을 만들어 두었습니다.
+다 지우고 새로 구현하면 될 것 같습니다.
+현재는 username과 password name속성을 가지고 있습니다. -->
 <h3>
-     signin
+     허허.. 종강일을 세기 전에 과제부터 하는 게 어떤가?
 </h3>
+
+{% if error is not None %}
+    {{ error }}
+{% endif %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <label>어.. 학생 이름이 어떻게 됐더라?</label><input type="text", name="username"><br>
+    <label>설마 나한테 비밀.. 번호가 있는건 아니겠지?</label><input type="password", name="password"><br>
+    <input type="submit" value="종강일을 세면 시간이 더 안갈텐데..">
+    
+</form>
