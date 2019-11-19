@@ -164,12 +164,6 @@ class EventCalender:
 
     def delete_search_buffer(self):
         #TODO 완전히 참조해제하는 코드 더 좋은 방법이 있을 것 같다
-        temp = []
-        for i in range(self.__eventlist):
-            for j in range(self.__search_buffer):
-                if self.__eventlist[i] is self.__search_buffer[j]:
-                    temp.append((i, j))
-        for k in temp:
-            del self.__eventlist[k[0]]
-            del self.__search_buffer[k[1]]
+        for i in self.__search_buffer:
+            del self.__eventlist[i]
 
