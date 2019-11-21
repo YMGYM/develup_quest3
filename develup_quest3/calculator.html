@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+  <style>
+    .container {}
+
+    .event_popup {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      z-index: 100;
+      padding: 52px 60px 60px;
+      width: 600px;
+      height: 400px;
+      transform: translate(-50%, -50%);
+      box-sizing: border-box;
+      background: #fff;
+    }
+
+    .event_dim {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .header {
+      text-align: center;
+    }
+
+    .graph_wrapper p {
+      margin: 0;
+    }
+
+    .graph_finish_course {
+      height: 40px;
+      width: 550px;
+      background: #ccc;
+      border-radius: 40px;
+    }
+
+    .graph_finish_course span {
+      display: block;
+      padding: 0 10px;
+      width: 75%;
+      height: 40px;
+      line-height: 40px;
+      text-align: right;
+      background: violet;
+      border-radius: 40px;
+      box-sizing: border-box;
+      color: #fff;
+    }
+
+    .graph_next_week {
+      height: 40px;
+      background: #ccc;
+      border-radius: 40px;
+    }
+
+    .graph_next_week span {
+      display: block;
+      padding: 0 10px;
+      width: 75%;
+      height: 40px;
+      line-height: 40px;
+      text-align: right;
+      background: violet;
+      border-radius: 40px;
+      box-sizing: border-box;
+      color: #fff;
+    }
+
+    .graph_next_quarter {
+      height: 40px;
+      background: #ccc;
+      border-radius: 40px;
+    }
+
+    .graph_next_quarter span {
+      display: block;
+      padding: 0 10px;
+      width: 75%;
+      height: 40px;
+      line-height: 40px;
+      text-align: right;
+      background: violet;
+      border-radius: 40px;
+      box-sizing: border-box;
+      color: #fff;
+    }
+
+    .small_graph_wrapper {
+      display: grid;
+      grid-template-columns: 270px 270px
+    }
+
+    .event_table td {
+      border: 1px solid black;
+    }
+  </style>
+
+  <div class="event_popup">
+    <h2>이벤트 등록</h2>
+    <table class="eventform_table">
+      <colgroup>
+        <col>
+      </colgroup>
+      <tbody>
+        <tr>
+          <th><label for="">이벤트 종류</label></th>
+          <td></td>
+        </tr>
+        <tr>
+          <th><label for="event_txt1">이벤트 이름</label></th>
+          <td><input type="text" id="event_txt1" placeholder="이름을 입력해주세요." </td> </tr> <tr>
+          <th><label for="event_datepicker">이벤트 날짜</label></th>
+          <td><input type="text" id="event_datepicker"></td>
+        </tr>
+        <tr>
+          <th>프로필</th>
+          <td>
+            <!-- #는 수정하고 filefinder 이름 바꾸고 싶으면 바꾸기 -->
+            <form action="#" method="post" enctype="multipart/form-data">
+              <input type="file" name="filefinder">
+              <input type="submit">
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="txt_center">
+      <a href="#a" class="event_submit">제출</a>
+    </div>
+    <a href="#a" class="event_close">닫기</a>
+  </div>
+
+  <div class="event_dim"></div>
+
+  <div class="container">
+    <div>
+      <h2 class="header">종강일계산기</h2>
+    </div>
+    <div class="graph_wrapper">
+      <div class="graph_finish_course_wrapper">
+        <p>종강</p>
+        <div class="graph_finish_course">
+          <span>75%</span>
+        </div>
+        <p>2019년</p>
+      </div>
+      <div class="small_graph_wrapper">
+        <div class="graph_next_week_wrapper">
+          <p>다음 주차</p>
+          <div class="graph_next_week">
+            <span>75%</span>
+          </div>
+          <p>4주차</p>
+        </div>
+        <div class="graph_next_quarter_wrapper">
+          <p>다음 분기</p>
+          <div class="graph_next_quarter">
+            <span>75%</span>
+          </div>
+          <p>1/4</p>
+        </div>
+      </div>
+    </div>
+
+    <table class="event_table" id="tb">
+      <tbody id="tableshow">
+        <tr>
+          <td>사진</td>
+          <td>중간고사까지</td>
+          <td>10일 남음</td>
+          <td style='cursor:pointer;' onclick='javascript:delElement(this);'>X</td>
+        </tr>
+        <tr>
+          <td>사진</td>
+          <td>축제까지</td>
+          <td>30일 남음</td>
+          <td style='cursor:pointer;' onclick='javascript:delElement(this);'>X</td>
+        </tr>
+        <tr>
+          <td>사진</td>
+          <td>학교 다닌지</td>
+          <td>100일 째</td>
+          <td style='cursor:pointer;' onclick='javascript:delElement(this);'>X</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <input type="button" class="open" value="추가" onclick="rowAdd()">
+
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $("#datepicker").datepicker();
+      $("#ui-datepicker-div").css("z-index", "101");
+
+      $(".open").on('click', function() {
+        $(".event_popup").show();
+        $(".event_dim").show();
+      });
+
+      $(".event_close").on('click', function() {
+        $(this).parent().hide();
+        $(".event_dim").hide();
+      });
+    });
+  </script>
+
+  <script>
+    function rowAdd() {
+      var objRow;
+      objRow = document.all["tableshow"].insertRow();
+
+      var objCell_picture = objRow.insertCell();
+      objCell_picture.innerHTML = "사진";
+
+      var objCell_event = objRow.insertCell();
+      objCell_event.innerHTML = "이벤트 명";
+
+      var objCell_date = objRow.insertCell();
+      objCell_date.innerHTML = "n일 남음 또는 n일 지남";
+
+      var objCell_delete = objRow.insertCell();
+      objCell_delete.outerHTML = "<td style='cursor:pointer;' onclick='javascript:delElement(this);'>X</td>";
+    }
+
+    function delElement(obj) {
+      var index = obj.parentElement.rowIndex;
+      document.getElementById('tableshow').deleteRow(index);
+    }
+  </script>
+
+</body>
+
+</html>
