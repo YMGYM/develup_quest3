@@ -1,5 +1,15 @@
 안녕하세요
 
+{% if error is not None %}
+    {{ error }}
+{% endif %}
+
 {% if user.is_authenticated %}
     {{user.username}}님
+    <a href="{% url 'account:signout' %}">로그아웃</a>
+    <a href="{% url 'account:edituser' %}">비밀번호 변경</a>
+{% else %}
+    <a href="{% url 'account:signup' %}">회원가입</a>
+    <a href="{% url 'account:signin' %}">로그인</a>
 {% endif %}
+

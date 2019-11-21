@@ -15,3 +15,9 @@
     <input type="submit" value="종강일을 세면 시간이 더 안갈텐데..">
     
 </form>
+
+{% if user.is_authenticated%}
+    <!-- else 말고 방법이 있나? -->
+{% else %}
+    <a href="{% url 'account:signup' %}">회원가입</a>
+{% endif %}
