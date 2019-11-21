@@ -1,3 +1,5 @@
+{% load static %}
+{% url "" %}
 <!-- 회원가입 구현을 위해 임시로 form을 만들어 두었습니다.
 다 지우고 새로 구현하면 될 것 같습니다.
 현재는 username과 password name속성을 가지고 있습니다. -->
@@ -21,3 +23,6 @@
 {% else %}
     <a href="{% url 'account:signup' %}">회원가입</a>
 {% endif %}
+<style>
+    
+</style>
