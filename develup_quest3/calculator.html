@@ -7,39 +7,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="datepicker3.css" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="bootstrap-datepicker.kr.js"></script>
+
 </head>
 
 <body>
   <style>
     .container {}
-
-    .event_popup {
-      display: none;
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      z-index: 100;
-      padding: 50px 60px 60px;
-      width: 750px;
-      height: 550px;
-      transform: translate(-50%, -50%);
-      box-sizing: border-box;
-      background: #fff;
-    }
-
-    .event_dim {
-      display: none;
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-    }
 
     .header {
       text-align: center;
@@ -106,62 +87,59 @@
       color: #fff;
     }
 
-    .small_graph_wrapper {
-      display: grid;
-
-    }
-
-    .graph_next_week_wrapper {
-      padding-right: 5px;
-    }
-
     .event_table td {
       border: 1px solid black;
     }
   </style>
 
-  <div class="event_popup">
-    <h4>이벤트 등록</h4>
-    <table class="eventform_table">
-      <colgroup>
-        <col>
-      </colgroup>
-      <tbody>
-        <tr>
-          <th><label for="">이벤트 종류</label></th>
-          <td></td>
-        </tr>
-        <tr>
-          <th><label for="event_txt1">이벤트 이름</label></th>
-          <td><input type="text" id="event_txt1" placeholder="이름을 입력해주세요." </td> </tr> <tr>
-          <th><label for="datepicker">이벤트 날짜</label></th>
-          <td><input type="text" class="datepicker"></td>
-        </tr>
-        <tr>
-          <th><label for="filefinder">프로 </label></th>
-          <td>
-            <!-- #는 수정하고 filefinder 이름 바꾸고 싶으면 바꾸기 -->
-            <form action="#" method="post" enctype="multipart/form-data">
-              <input type="file" name="filefinder">
-              <input type="submit">
-            </form>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="txt_center">
-      <a href="#a" class="event_submit" onclick="rowAdd()">제출</a>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">이벤트 등록</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="event_type" class="col-form-label">이벤트 타입</label>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                <label class="form-check-label" for="inlineCheckbox1">D-</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label class="form-check-label" for="inlineCheckbox2">D+</label>
+              </div>
+              <div class="form-group">
+                <label for="event_name" class="col-form-label">이벤트 이름</label>
+                <input type="text" class="text" id="event_name">
+              </div>
+              <div class="form-group">
+                <label for="datepicker" class="col-form-label">이벤트 날짜</label>
+                <input type="text" class="datepicker">
+              </div>
+              <div class="form-group">
+                <label for="filefinder" class="col-form-label">프로필</label>
+                <input type="file" name="profile">
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="rowAdd()" data-dismiss="modal">등록</button>
+        </div>
+      </div>
     </div>
-    <a href="#a" class="event_close">닫기</a>
   </div>
-
-  <div class="event_dim"></div>
+</div>
 
   <div class="container">
     <div>
       <h2 class="header">종강일계산기</h2>
     </div>
+
     <div class="graph_wrapper">
       <div class="graph_finish_course_wrapper">
         <p>종강</p>
@@ -170,21 +148,19 @@
         </div>
         <p>2019년</p>
       </div>
-      <div class="small_graph_wrapper">
-        <div class="graph_next_week_wrapper">
-          <p>다음 주차</p>
-          <div class="graph_next_week">
-            <span>75%</span>
-          </div>
-          <p>4주차</p>
+      <div class="graph_next_week_wrapper">
+        <p>다음 주차</p>
+        <div class="graph_next_week">
+          <span>75%</span>
         </div>
-        <div class="graph_next_quarter_wrapper">
-          <p>다음 분기</p>
-          <div class="graph_next_quarter">
-            <span>75%</span>
-          </div>
-          <p>1/4</p>
+        <p>4주차</p>
+      </div>
+      <div class="graph_next_quarter_wrapper">
+        <p>다음 분기</p>
+        <div class="graph_next_quarter">
+          <span>75%</span>
         </div>
+        <p>1/4</p>
       </div>
     </div>
 
@@ -211,21 +187,20 @@
       </tbody>
     </table>
 
-    <input type="button" class="open" value="추가">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">추가</button>
 
   </div>
 
   <script>
     $(document).ready(function() {
-      $(".open").on('click', function() {
-        $(".event_popup").show();
-        $(".event_dim").show();
+      $('.datepicker').datepicker({
+        format: "yyyy-mm-dd",
+        language: "kr"
       });
 
-      $(".event_close").on('click', function() {
-        $(this).parent().hide();
-        $(".event_dim").hide();
-      });
+      $('#exampleModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+      })
     });
   </script>
 
