@@ -55,7 +55,7 @@ ROOT_URLCONF = 'develup_quest3.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'base_template')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,4 +118,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+#static 폴더 경로 추가 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
