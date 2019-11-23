@@ -6,4 +6,4 @@ class EventModel(models.Model):
     event_name = models.CharField(max_length = 20)
     event_date = models.DateField()
     event_comment = models.CharField(max_length = 40)
-    event_picture = models.ImageField(null = True, blank = True) #블랭크 널 어느걸로?
+    event_picture = models.ImageField(null = True, blank = True) #블랭크는 폼, 널은 디비
