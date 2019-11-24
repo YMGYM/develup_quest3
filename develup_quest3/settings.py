@@ -25,7 +25,7 @@ SECRET_KEY = '+xc@^xza)nicy^qi#)b*y%u@6%egkaks&q15hm=o4%#9b+ry^d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".goorm.io"]
+ALLOWED_HOSTS = [".goorm.io", "127.0.0.1"]
 
 
 # Application definition
@@ -118,4 +118,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+#static 폴더 경로 추가 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

@@ -1,5 +1,4 @@
 안녕하세요
-
 {% if error is not None %}
     {{ error }}
 {% endif %}
@@ -10,6 +9,15 @@
     <a href="{% url 'account:edituser' %}">비밀번호 변경</a>
 {% else %}
     <a href="{% url 'account:signup' %}">회원가입</a>
-    <a href="{% url 'account:signin' %}">로그인</a>
+    <a href="{% url 'account:signin' %}">로그인</a>            
 {% endif %}
+
+<style>
+a{
+    font-size:30px;
+}
+</style>
+
+
+
 

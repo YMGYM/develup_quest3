@@ -1,23 +1,39 @@
-<!-- 회원가입 구현을 위해 임시로 form을 만들어 두었습니다.
-다 지우고 새로 구현하면 될 것 같습니다.
-현재는 username과 password name속성을 가지고 있습니다. -->
-<h3>
-     허허.. 종강일을 세기 전에 과제부터 하는 게 어떤가?
-</h3>
+<!DOCTYPE html>
+<html>
 
-{% if error is not None %}
-    {{ error }}
-{% endif %}
-<form action="" method="POST">
-    {% csrf_token %}
-    <label>어.. 학생 이름이 어떻게 됐더라?</label><input type="text", name="username"><br>
-    <label>설마 나한테 비밀.. 번호가 있는건 아니겠지?</label><input type="password", name="password"><br>
-    <input type="submit" value="종강일을 세면 시간이 더 안갈텐데..">
-    
-</form>
+<head>
 
-{% if user.is_authenticated%}
-    <!-- else 말고 방법이 있나? -->
-{% else %}
-    <a href="{% url 'account:signup' %}">회원가입</a>
-{% endif %}
+  <meta charset="UTF-8">
+
+  <title>로그인 페이지</title>
+
+  <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+
+    <link rel="stylesheet" href="css/signin_style.css" media="screen" type="text/css" />
+
+</head>
+
+<body>
+  <div class="login-card">
+    <center><h1>앗 종강이야</h1></center>
+    <h2>LOGIN</h2><br>
+  <center>
+    <form>
+    <input type="text" name="user" placeholder="아이디"><br>
+    <input type="password" name="pass" placeholder="패스워드"><br>
+    <input type="submit" name="login" class="login login-submit" value="로그인">
+  </form>
+  </center>
+
+  <div class="login-help">
+    <a href="#">회원가입</a> • <a href="#">비밀번호를 잃어버렸나요?
+  </div>
+ </div>
+
+<!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div> -->
+
+  <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
+
+</body>
+
+</html>
