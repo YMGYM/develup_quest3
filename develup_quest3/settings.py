@@ -129,3 +129,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'd_day_calculator', 'static'),
     os.path.join(BASE_DIR, 'account', 'static')
 )
+
+
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'

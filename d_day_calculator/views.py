@@ -25,9 +25,11 @@ def view_events(request):
     else:
         form = PostEventForm()
         percentage = '30%'
-        ctxt = EventModel.objects.exclude(event_name = '종강')[0]
-        print(type(ctxt.event_date))
+    #     ctxt = EventModel.objects.exclude(event_name = '종강')[0]
+    #     print(type(ctxt.event_date))
+        # return render(request,'d_day_calculator/view_events.html', 
+        #     {'lastday' : ctxt.event_date, 'form' : form},)
         return render(request,'d_day_calculator/view_events.html', 
-            {'lastday' : ctxt.event_date, 'form' : form},)
+            {'form' : form})
 
     

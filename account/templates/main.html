@@ -39,8 +39,8 @@
 		    <div class="collapse navbar-collapse" id="main-navbar">
 			  
 				<ul class="nav navbar-nav navbar-right">
-					<li><a class="smoothScroll"> LOGIN </a></li>  <!--로그인 페이지와 연동-->
-					<li><a class="smoothScroll"> JOIN </a></li>   <!--회원가입 페이지와 연동-->
+					<li><a class="smoothScroll" href="{% url 'account:signin' %}"> LOGIN </a></li>  <!--로그인 페이지와 연동-->
+					<li><a class="smoothScroll" href="{% url 'event:view_events' %}"> JOIN </a></li>   <!--회원가입 페이지와 연동-->
 				</ul>
 
 		    </div><!-- /.navbar-collapse -->

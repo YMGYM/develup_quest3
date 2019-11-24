@@ -25,7 +25,7 @@ def signin(request):
     if request.method == "POST":
         username=request.POST["username"]
         password=request.POST["password"]
-        user = auth.authenticate(request, username=username, password=password)
+        user = auth.authenticate(request, uesrname=username, password=password)
         if user is not None:
             auth.login(request, user)
             
