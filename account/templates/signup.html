@@ -24,6 +24,12 @@
 
 
 {% block content %}
+    {% if error is not None %}
+        <div class="alert alert-warning">
+            <strong>오류!</strong> {{error}}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    {% endif %}
       <article class="container">
         <div class="page-header">
           <h1>회원가입 <small>Sign up</small></h1>

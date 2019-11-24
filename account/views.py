@@ -13,7 +13,7 @@ def signup(request):
             user = User.objects.create_user(username=request.POST["username"],password=request.POST["password1"],email=request.POST["email"])
             auth.login(request, user)
             return redirect('account:loginchk')
-        return render(request, 'signup.html')
+        return render(request, 'signup.html',{'error':'비밀번호가 같지 않습니다.'})
     
     return render(request, 'signup.html')
 
@@ -25,13 +25,15 @@ def signin(request):
     if request.method == "POST":
         username=request.POST["username"]
         password=request.POST["password"]
-        user = auth.authenticate(request, uesrname=username, password=password)
+        user = auth.authenticate(username=username, password=password)
+        print(user)
         if user is not None:
             auth.login(request, user)
-            
             return redirect('account:loginchk')
         else:
-            return render(request, 'signin.html', {'error': '어디 내앞에서 감히 거짓말인가!'})
+            return render(request, 'signin.html', {'error': '아이디나 비밀번호를 다시 확인해주세요'})
+        
+        
     return render(request, 'signin.html')
 
 @login_required(login_url='account:signin')

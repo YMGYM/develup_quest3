@@ -1,24 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base_template.html" %}
+{% load staticfiles %}
+{% block title %}
+캘린더
+{% endblock %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+{% block cdn %}
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+<link href=" {% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+  integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'css/datepicker3.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/viewevents.css' %}" />
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+  integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.kr.js' %}"></script>
+{% endblock %}
 
-  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="datepicker3.css" />
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="bootstrap-datepicker.js"></script>
-  <script type="text/javascript" src="bootstrap-datepicker.kr.js"></script>
-
-</head>
-
-<body>
+{% block content %}
   <style>
     .container {}
     .header {
@@ -156,12 +161,16 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="event_name" class="col-form-label">이벤트 이름</label>
-              <input type="text" class="text" id="event_name" style="margin-left: 5px;">
+              <label for="event_name" name = "event_name" class="col-form-label">이벤트 이름</label>
+              {{ form.event_name }}
             </div>
             <div class="form-group">
-              <label for="datepicker" class="col-form-label">이벤트 날짜</label>
-              <input type="text" class="datepicker" style="margin-left: 5px;">
+              <label for="datepicker" name = "start_date" class="col-form-label">이벤트 날짜</label>
+              {{ form.start_date }}
+            </div>
+            <div class="form-group">
+              <label for="datepicker" name = "event_date" class="col-form-label">이벤트 날짜</label>
+              {{ form.event_date }}
             </div>
             <div class="form-group">
               <label for="filefinder" class="col-form-label">프로필</label>
@@ -210,24 +219,14 @@
     <!-- 이벤트 테이블 -->
     <table class="event_table" id="tb">
       <tbody id="tableshow">
+        {% for event in not_lastday %}
         <tr>
-          <td>사진</td>
-          <td>중간고사까지</td>
-          <td>10일 남음</td>
+          <td>{{ event.event_picture }}</td>
+          <td>{{ event.event_name }}</td>
+          <td>{{ event.event_date }}</td>  
           <td style='cursor:pointer;' onclick='javascript:delElement(this);'><span class="close">&times;</span></td>
         </tr>
-        <tr>
-          <td>사진</td>
-          <td>축제까지</td>
-          <td>30일 남음</td>
-          <td style='cursor:pointer;' onclick='javascript:delElement(this);'><span class="close">&times;</span></td>
-        </tr>
-        <tr>
-          <td>사진</td>
-          <td>학교 다닌지</td>
-          <td>100일 째</td>
-          <td style='cursor:pointer;' onclick='javascript:delElement(this);'><span class="close">&times</span></td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
 
@@ -289,6 +288,5 @@
     }
   </script>
 
-</body>
-
-</html>
+<script type="text/javascript" src="{% static 'js/view_events.js' %}"></script>
+{% endblock %}

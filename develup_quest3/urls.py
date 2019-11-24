@@ -19,7 +19,7 @@ from account import urls as account_urls
 from account import views as main
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('account/', include(account_urls)),
-    path('event/', include('d_day_calculator.urls')),
+    path('account/', include(account_urls), name = 'account'),
+    path('event/', include('d_day_calculator.urls'), name = 'event'),
     path('', main.mainpage),
 ]

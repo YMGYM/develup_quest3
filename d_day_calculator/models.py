@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import datetime
 
 # Create your models here.
@@ -10,3 +11,6 @@ class EventModel(models.Model):
     event_date = models.DateField()
     event_comment = models.CharField(max_length = 40)
     event_picture = models.ImageField(null = True, blank = True) #블랭크는 폼, 널은 디비
+    
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+
