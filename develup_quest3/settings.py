@@ -121,9 +121,6 @@ USE_TZ = True
 
 #static 폴더 경로 추가 
 STATIC_URL = '/static/'
-<<<<<<< HEAD
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-=======
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_DIR = [os.path.join(BASE_DIR, 'd_day_calculator', 'static')]
->>>>>>> 43d5e38bcbe5cc4b11d769793ea8f29a6b273131
