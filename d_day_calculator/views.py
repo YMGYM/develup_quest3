@@ -29,3 +29,5 @@ def view_events(request):
         print(type(ctxt.event_date))
         return render(request,'d_day_calculator/view_events.html', 
             {'lastday' : ctxt.event_date, 'form' : form},)
+
+    

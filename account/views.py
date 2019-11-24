@@ -10,7 +10,7 @@ def signup(request):
         return redirect('account:loginchk')
     if request.method == "POST":
         if request.POST["password1"] == request.POST["password2"]:
-            user = User.objects.create_user(username=request.POST["username"],password=request.POST["password1"])
+            user = User.objects.create_user(username=request.POST["username"],password=request.POST["password1"],email=request.POST["email"])
             auth.login(request, user)
             return redirect('account:loginchk')
         return render(request, 'signup.html')
@@ -71,3 +71,7 @@ def edituser(request):
 @login_required(login_url='account:signin')
 def loginonly(request):
     return render(request, 'login_only.html')
+
+
+def mainpage(request):
+    return render(request, 'main.html')

@@ -123,4 +123,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATIC_DIR = [os.path.join(BASE_DIR, 'd_day_calculator', 'static')]
+# STATIC_DIR = [os.path.join(BASE_DIR, 'd_day_calculator', 'static')]
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'd_day_calculator', 'static'),
+    os.path.join(BASE_DIR, 'account', 'static')
+)

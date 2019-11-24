@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from account import urls as account_urls
-
+from account import views as main
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include(account_urls)),
     path('event/', include('d_day_calculator.urls')),
+    path('', main.mainpage),
 ]
