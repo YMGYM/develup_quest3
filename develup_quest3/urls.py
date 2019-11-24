@@ -20,4 +20,5 @@ from account import urls as account_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include(account_urls)),
+    path('event/', include('d_day_calculator.urls')),
 ]

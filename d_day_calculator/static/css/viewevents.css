@@ -1,0 +1,101 @@
+  .event_popup {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 100;
+    padding: 50px 60px 60px;
+    width: 750px;
+    height: 550px;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    background: #fff;
+  }
+
+  .event_dim {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .header {
+    text-align: center;
+  }
+
+  .graph_wrapper p {
+    margin: 0;
+  }
+
+  .graph_finish_course {
+    height: 40px;
+    background: #ccc;
+    border-radius: 40px;
+  }
+
+  .graph_finish_course span {
+    display: block;
+    padding: 0 10px;
+    width: 75%;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    background: violet;
+    border-radius: 40px;
+    box-sizing: border-box;
+    color: #fff;
+  }
+
+  .graph_next_week {
+    height: 40px;
+    background: #ccc;
+    border-radius: 40px;
+  }
+
+  .graph_next_week span {
+    display: block;
+    padding: 0 10px;
+    width: 75%;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    background: violet;
+    border-radius: 40px;
+    box-sizing: border-box;
+    color: #fff;
+  }
+
+  .graph_next_quarter {
+    height: 40px;
+    background: #ccc;
+    border-radius: 40px;
+  }
+
+  .graph_next_quarter span {
+    display: block;
+    padding: 0 10px;
+    width: 75%;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    background: violet;
+    border-radius: 40px;
+    box-sizing: border-box;
+    color: #fff;
+  }
+
+  .small_graph_wrapper {
+    display: grid;
+
+  }
+
+  .graph_next_week_wrapper {
+    padding-right: 5px;
+  }
+
+  .event_table td {
+    border: 1px solid black;
+  }
