@@ -55,7 +55,7 @@ ROOT_URLCONF = 'develup_quest3.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(os.getcwd(), 'base_template')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
