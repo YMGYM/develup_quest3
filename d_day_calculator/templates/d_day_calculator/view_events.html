@@ -1,0 +1,120 @@
+{% extends "base_template.html" %}
+{% load staticfiles %}
+{% block title %}
+캘린더
+{% endblock %}
+
+{% block cdn %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+  integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'css/datepicker3.css' %}" />
+<link rel="stylesheet" type="text/css" href="(% static 'css/viewevents.css' %}" />
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+  integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.kr.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">이벤트 등록</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method = "POST" id="post_event">
+            {%csrf_token%}
+            <div class="form-group">
+              <div class="form-group">
+                <label name="event_name" class="col-form-label">이벤트 이름</label>
+                {{ form.event_name }}
+              </div>
+              <div class="form-group">
+                <label name="event_date" class="col-form-label">이벤트 날짜</label>
+                {{ form.event_date }}
+              </div>
+              <div class="form-group">
+                <label name="event_comment" class="col-form-label">이벤트 설명</label>
+                {{ form.event_comment }}
+              </div>
+              <div class="form-group">
+                <label name="event_picture" class="col-form-label">프로필</label>
+                {{ form.event_picture }}
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" onclick="document.getElementById('post_event').submit();" data-dismiss="modal">등록</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div>
+    <h2 class="header">종강일계산기</h2>
+  </div>
+
+  <div class="graph_wrapper">
+    <div class="graph_finish_course_wrapper">
+      <p>종강</p>
+      <div class="graph_finish_course">
+        <span>{{ lastday }}</span>
+      </div>
+      <p>2019년</p>
+    </div>
+    <div class="graph_next_week_wrapper">
+      <p>다음 주차</p>
+      <div class="graph_next_week">
+        <span>75%</span>
+      </div>
+      <p>4주차</p>
+    </div>
+    <div class="graph_next_quarter_wrapper">
+      <p>다음 분기</p>
+      <div class="graph_next_quarter">
+        <span>75%</span>
+      </div>
+      <p>1/4</p>
+    </div>
+  </div>
+
+  <table class="event_table" id="tb">
+    <tbody id="tableshow">
+      <tr>
+        <td>사진</td>
+        <td>중간고사까지</td>
+        <td>10일 남음</td>
+        <td style='cursor:pointer;' onclick='javascript:delElement(this);'>X</td>
+      </tr>
+      <tr>
+        <td>사진</td>
+        <td>축제까지</td>
+        <td>30일 남음</td>
+        <td style='cursor:pointer;' onclick='javascript:delElement(this);'>X</td>
+      </tr>
+      <tr>
+        <td>사진</td>
+        <td>학교 다닌지</td>
+        <td>100일 째</td>
+        <td style='cursor:pointer;' onclick='javascript:delElement(this);'>X</td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">추가</button>
+</div>
+<script type="text/javascript" src="{% static 'js/view_events.js' %}"></script>
+{% endblock %}

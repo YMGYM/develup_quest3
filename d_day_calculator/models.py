@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 # 로그인 연동 걸어야함

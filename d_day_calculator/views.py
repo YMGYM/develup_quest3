@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.template import Context, Template
+from .models import EventModel
 from .forms import PostEventForm
 
 # Create your views here.
@@ -7,11 +9,21 @@ def post_event(request):
         form = PostEventForm(request.POST) 
         if form.is_valid():
             evt = form.save(commit = False) 
-            evt.generate()
-            return redirect('index') 
+            return redirect('event') 
     else:
         form = PostEventForm()
-        return render(request, 'post_event.html', {'form' : form})
+        return render(request, 'd_day_calculator/post_event.html', {'form' : form})
 
 def view_events(request):
-    return render(request,'view_events.html')
+    if request.method == "POST":
+        form = PostEventForm(request.POST)
+        if form.is_valid():
+            form.save() #일단 세이브
+            return redirect('/event')
+    else:
+        form = PostEventForm()
+        percentage = '30%'
+        ctxt = EventModel.objects.exclude(event_name = '종강')[0]
+        print(type(ctxt.event_date))
+        return render(request,'d_day_calculator/view_events.html', 
+            {'lastday' : ctxt.event_date, 'form' : form},)
