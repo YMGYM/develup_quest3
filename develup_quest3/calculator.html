@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="datepicker3.css" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="bootstrap-datepicker.kr.js"></script>
+
+</head>
+
+<body>
+  <style>
+    .container {}
+
+    .header {
+      text-align: center;
+    }
+
+    .graph_wrapper p {
+      margin: 0;
+    }
+
+    /*
+        계산기가 작동하려면
+        각 그래프의 span의 width값
+        html에 있는 span태그 값
+        html에 있는 font태그 값
+
+        이렇게 3가지가 변동되면 됨
+    */
+    /* 종강일 그래프    */
+    .graph_finish_course {
+      height: 40px;
+      background: #ccc;
+      border-radius: 40px;
+    }
+
+    .graph_finish_course span {
+      display: block;
+      padding: 0 10px;
+      width: 75%;
+      height: 40px;
+      line-height: 40px;
+      text-align: right;
+      background: skyblue;
+      border-radius: 40px;
+      box-sizing: border-box;
+      color: #fff;
+    }
+
+    /* 주차 그래프 */
+    .graph_next_week {
+      height: 40px;
+      background: #ccc;
+      border-radius: 40px;
+    }
+
+    .graph_next_week span {
+      display: block;
+      padding: 0 10px;
+      width: 75%;
+      height: 40px;
+      line-height: 40px;
+      text-align: right;
+      background: skyblue;
+      border-radius: 40px;
+      box-sizing: border-box;
+      color: #fff;
+    }
+
+    /* 분기 그래프 */
+    .graph_next_quarter {
+      height: 40px;
+      background: #ccc;
+      border-radius: 40px;
+    }
+
+    .graph_next_quarter span {
+      display: block;
+      padding: 0 10px;
+      width: 75%;
+      height: 40px;
+      line-height: 40px;
+      text-align: right;
+      background: skyblue;
+      border-radius: 40px;
+      box-sizing: border-box;
+      color: #fff;
+    }
+
+    /* 이벤트 테이블 */
+    table, th, td {
+      border: none;
+    }
+
+    table {
+      width: 100%;
+      display: table;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    /* 종강일 입력 modal */
+    .fc_modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    /* 종강일 입력 modal content */
+    .fc_modal_content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 350px;
+      height: 200px;
+    }
+
+    .fc_content_wrapper {
+      margin-bottom: 15px
+    }
+  </style>
+
+  <!-- 종강일 입력 폼 -->
+  <div id="myModal" class="fc_modal">
+    <div class="fc_modal_content">
+      <span class="close">&times;</span>
+        <div class="fc_content_wrapper">
+          <label for="datepicker" class="col-form-label">개강일</label>
+          <input type="text" class="datepicker" style="margin-left: 5px;">
+        </div>
+        <div class="fc_content_wrapper">
+          <label for="datepicker" class="col-form-label">종강일</label>
+          <input type="text" class="datepicker" style="margin-left: 5px;">
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">등록</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이벤트 등록 폼 -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">이벤트 등록</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="event_name" class="col-form-label">이벤트 이름</label>
+              <input type="text" class="text" id="event_name" style="margin-left: 5px;">
+            </div>
+            <div class="form-group">
+              <label for="datepicker" class="col-form-label">이벤트 날짜</label>
+              <input type="text" class="datepicker" style="margin-left: 5px;">
+            </div>
+            <div class="form-group">
+              <label for="filefinder" class="col-form-label">프로필</label>
+              <input type="file" name="profile" style="margin-left: 35px;">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="rowAdd()" data-dismiss="modal">등록</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 메인 창 -->
+  <div class="container">
+    <div>
+      <h1 class="header">종강일계산기</h1>
+    </div>
+
+    <!-- 그래프 -->
+    <div class="graph_wrapper">
+      <div class="graph_finish_course_wrapper">
+        <font size=5px style="margin-left:1%">종강</font>
+        <div class="graph_finish_course">
+          <span>75%</span>
+        </div>
+          <font size=2px style="margin-left: 87%;">2019년 12월 15일</font>
+      </div>
+      <div class="graph_next_week_wrapper">
+        <font size=5px style="margin-left:1%">다음 주차</font>
+        <div class="graph_next_week">
+          <span>75%</span>
+        </div>
+        <font size=2px style="margin-left: 95%;">4주차</font>
+      </div>
+      <div class="graph_next_quarter_wrapper">
+        <font size=5px style="margin-left:1%">다음 분기</font>
+        <div class="graph_next_quarter">
+          <span>75%</span>
+        </div>
+        <font size=2px style="margin-left: 96%;">1/4</font>
+      </div>
+    </div>
+
+    <!-- 이벤트 테이블 -->
+    <table class="event_table" id="tb">
+      <tbody id="tableshow">
+        <tr>
+          <td>사진</td>
+          <td>중간고사까지</td>
+          <td>10일 남음</td>
+          <td style='cursor:pointer;' onclick='javascript:delElement(this);'><span class="close">&times;</span></td>
+        </tr>
+        <tr>
+          <td>사진</td>
+          <td>축제까지</td>
+          <td>30일 남음</td>
+          <td style='cursor:pointer;' onclick='javascript:delElement(this);'><span class="close">&times;</span></td>
+        </tr>
+        <tr>
+          <td>사진</td>
+          <td>학교 다닌지</td>
+          <td>100일 째</td>
+          <td style='cursor:pointer;' onclick='javascript:delElement(this);'><span class="close">&times</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <center>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 15px;">이벤트 등록</button>
+    </center>
+
+  </div>
+
+
+  <script>
+    $(document).ready(function() {
+      // datepicker 호출
+      $('.datepicker').datepicker({
+        format: "yyyy-mm-dd",
+        language: "kr"
+      });
+
+      // 이벤트 등록 폼 호
+      $('#exampleModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+      })
+    });
+  </script>
+
+  <script>
+    // 테이블 행 추가
+    function rowAdd() {
+      var objRow;
+      objRow = document.all["tableshow"].insertRow();
+
+      var objCell_picture = objRow.insertCell();
+      objCell_picture.innerHTML = "사진";
+
+      var objCell_event = objRow.insertCell();
+      objCell_event.innerHTML = "이벤트 명";
+
+      var objCell_date = objRow.insertCell();
+      objCell_date.innerHTML = "n일 남음 또는 n일 지남";
+
+      var objCell_delete = objRow.insertCell();
+      objCell_delete.outerHTML = "<td style='cursor:pointer;' onclick='javascript:delElement(this);'><span class='close'>&times;</span></td>";
+    }
+    // 테이블 행 삭제
+    function delElement(obj) {
+      var index = obj.parentElement.rowIndex;
+      document.getElementById('tableshow').deleteRow(index);
+    }
+
+    var modal = document.getElementById('myModal');
+    var span = document.getElementsByClassName("close")[0];
+
+    // 페이지 로드하자마자 개강,종강 입력 폼 띄우기
+    window.onload = function() {
+      modal.style.display = "block";
+    }
+
+    // x버튼 누르면 닫힘
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // 밖에 눌러도 창 닫힘
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+
+</html>
